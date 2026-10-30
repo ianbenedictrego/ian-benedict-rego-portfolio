@@ -1,0 +1,12 @@
+/* ==========================================================================
+   TAGS — small mono pills used by projects, skills and the project modal
+   ========================================================================== */
+
+.tags { display: flex; flex-wrap: wrap; gap: 6px; margin: auto 0 18px; }
+.tags span {
+  font-size: 11px;
+  color: var(--acc);
+  background: color-mix(in srgb, var(--acc) 10%, transparent);
+  padding: 3px 8px;
+  border-radius: 5px;
+}

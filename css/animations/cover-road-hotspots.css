@@ -1,0 +1,19 @@
+/* ==========================================================================
+   COVER: RoadLens collision hotspots  (js/animations/covers/road-hotspots.js)
+   Three hotspots build up one after another (delays 0s / 1.2s / 2.4s):
+   collision points (.c-pt) appear first, then the heat blob (.c-heat) swells.
+   A dot sweeps the timeline bar along the bottom; severity bars use .c-par.
+   ========================================================================== */
+
+.c-heat { fill: var(--amber); opacity: 0; transform-box: fill-box; transform-origin: center; animation: c-heat-pulse 6s ease-in-out infinite; }
+@keyframes c-heat-pulse {
+  0%      { opacity: 0;   transform: scale(.3); }
+  20%, 55% { opacity: .34; transform: scale(1); }
+  80%, 100% { opacity: 0;  transform: scale(1.1); }
+}
+
+.c-pt { fill: var(--amber); opacity: 0; animation: c-fade 6s ease-in-out infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  .c-heat, .c-pt { animation: none; opacity: .25; }
+}

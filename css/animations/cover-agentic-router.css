@@ -1,0 +1,11 @@
+/* ==========================================================================
+   COVER: Agentic LLM Router  (markup: js/animations/covers/agentic-router.js)
+   Query -> router -> LLM 1 (0.5s-1.5s) / LLM 2 (3.5s-4.5s) -> judge -> score.
+   Most of it uses the shared .c-f flash; only the score label is special.
+   ========================================================================== */
+
+.c-sc { opacity: 0; animation: c-fade 6s infinite; animation-delay: 2.2s; stroke: none; } /* judge score "0.92" */
+
+@media (prefers-reduced-motion: reduce) {
+  .c-sc { animation: none; }
+}

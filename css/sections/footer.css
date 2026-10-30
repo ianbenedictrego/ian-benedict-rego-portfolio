@@ -1,0 +1,9 @@
+/* ==========================================================================
+   FOOTER
+   ========================================================================== */
+
+footer { padding: 32px 0 56px; color: var(--mute); font-size: 12px; border-top: 1px solid var(--line); }
+footer .wrap { display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; }
+
+.top { transition: transform .2s, border-color .2s; }
+.top:hover { transform: translateY(-2px); }

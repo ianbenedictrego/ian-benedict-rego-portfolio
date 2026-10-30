@@ -1,0 +1,31 @@
+/* ==========================================================================
+   BASE — reset, typography, page wrapper, focus styles
+   ========================================================================== */
+
+/* pseudo-elements are NOT matched by `*`, so list them (timeline dots depend on it) */
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  scroll-padding-top: env(safe-area-inset-top, 0px);
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font: 400 16px/1.6 Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+.mono { font-family: "JetBrains Mono", ui-monospace, Menlo, monospace; }
+
+.wrap { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+
+a:focus-visible,
+button:focus-visible { outline: 2px solid var(--acc); outline-offset: 3px; }
+
+p, li, small { text-align: justify; hyphens: auto; -webkit-hyphens: auto; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}

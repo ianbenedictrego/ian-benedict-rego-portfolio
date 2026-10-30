@@ -1,0 +1,20 @@
+/* ==========================================================================
+   COVER: Bias Detection & Fairness Auditing  (js/animations/covers/nlp-bias.js)
+   A scan line sweeps the original text (0-3s), biased words blink amber
+   (.c-flag), then the rewritten text appears (3.2s) and the parity-gap bar
+   (.c-par, shared) closes.
+   ========================================================================== */
+
+.c-flag { fill: var(--amber); animation: c-blink 1.6s ease-in-out infinite; }
+@keyframes c-blink { 50% { opacity: .4; } }
+
+.c-scan { fill: var(--amber); opacity: 0; animation: c-sweep 6s linear infinite; }
+@keyframes c-sweep {
+  0%   { opacity: 1; transform: translateX(0); }
+  45%  { opacity: 1; transform: translateX(150px); }
+  50%, 100% { opacity: 0; transform: translateX(150px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .c-flag, .c-scan { animation: none; }
+}

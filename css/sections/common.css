@@ -1,0 +1,10 @@
+/* ==========================================================================
+   COMMON SECTION STYLES — section wrapper + standard heading (.sh)
+   ========================================================================== */
+
+section { padding: 72px 0; border-top: 1px solid var(--line); }
+
+.sh { margin: 0 0 36px; }
+.sh .eyebrow { font-size: 12px; color: var(--acc); margin: 0 0 8px; }
+.sh h2 { font-size: clamp(28px, 4vw, 38px); line-height: 1.15; margin: 0; letter-spacing: -.02em; }
+.sh p { color: var(--mute); margin: 10px 0 0; max-width: 56ch; }

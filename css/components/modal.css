@@ -1,0 +1,42 @@
+/* ==========================================================================
+   MODAL — "View more" dialog on project cards (markup: js/render/modal.js)
+   ========================================================================== */
+
+dialog {
+  padding: 0;
+  border: 1px solid var(--line);
+  border-top: 3px solid var(--acc);
+  border-radius: 14px;
+  background: var(--panel);
+  color: var(--text);
+  width: min(800px, 92vw);
+  max-height: 90vh;
+  overflow: auto;
+}
+dialog[open] { animation: pop .3s cubic-bezier(.2, .7, .2, 1); }
+dialog::backdrop { background: rgba(3, 8, 10, .65); backdrop-filter: blur(3px); }
+@keyframes pop { from { opacity: 0; transform: scale(.94) translateY(8px); } }
+
+.mgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; padding: 30px; align-items: center; }
+.mgrid h3 { margin: 0 0 14px; font-size: 22px; line-height: 1.25; padding-right: 24px; }
+.mgrid p { color: var(--mute); margin: 0 0 12px; font-size: 15px; }
+.mgrid .tags { margin: 16px 0 20px; }
+.mgrid .cover { margin: 0; }
+
+.xbtn {
+  position: absolute; top: 10px; right: 12px;
+  width: 34px; height: 34px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  background: var(--bg);
+  color: var(--text);
+  font-size: 18px;
+  cursor: pointer;
+}
+
+/* phones: stack text under the animation */
+@media (max-width: 640px) {
+  .mgrid { grid-template-columns: 1fr; padding: 22px; }
+  .mgrid .cover { order: -1; }
+}
+@media (prefers-reduced-motion: reduce) { dialog[open] { animation: none; } }

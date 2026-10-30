@@ -1,0 +1,21 @@
+/* ==========================================================================
+   BUTTONS — .btn (outline), .btn.p (primary), .btns (row of buttons)
+   ========================================================================== */
+
+.btns { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 22px; }
+
+.btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 10px 18px;
+  border-radius: 8px;
+  border: 1px solid var(--line);
+  color: var(--text);
+  text-decoration: none;
+  font-size: 14px; font-weight: 500;
+  background: transparent;
+}
+.btn.p { background: var(--acc); color: var(--accInk); border-color: var(--acc); }
+.btn:hover { border-color: var(--acc); }
+.btn.more { cursor: pointer; font-family: inherit; }
+
+.gi { width: 16px; height: 16px; } /* GitHub icon inside buttons */

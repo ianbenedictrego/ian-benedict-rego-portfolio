@@ -1,0 +1,35 @@
+/* ==========================================================================
+   COVER: Maritime vessel tracking  (js/animations/covers/vessel-tracking.js)
+   Timeline (6s loop):
+     0-3.4s  noisy AIS measurements (.c-m) appear one by one (every 0.42s)
+     ~0-3.9s Kalman track (.c-trk) is drawn; the vessel arrow follows it
+     4.3s+   dashed predicted path (.c-pred) fades in
+     IMM mode bars (.c-mode) swap: STRAIGHT -> TURN -> SPEED UP
+   ========================================================================== */
+
+/* measurement dots */
+.c-m { fill: var(--mute); opacity: 0; animation: c-fade 6s ease-in-out infinite; }
+
+/* estimated track: drawn via stroke-dashoffset (path uses pathLength=100) */
+.c-trk { fill: none; stroke: var(--acc); stroke-width: 2.2; stroke-linecap: round; stroke-dasharray: 100; stroke-dashoffset: 100; animation: c-draw 6s ease-in-out infinite; }
+@keyframes c-draw {
+  0%      { stroke-dashoffset: 100; opacity: 1; }
+  65%, 92% { stroke-dashoffset: 0;   opacity: 1; }
+  100%    { stroke-dashoffset: 0;   opacity: 0; }
+}
+
+/* prediction */
+.c-pred { fill: none; stroke: var(--amber); stroke-width: 2; stroke-dasharray: 4 5; opacity: 0; animation: c-predict 6s ease-in-out infinite; }
+@keyframes c-predict { 0%, 62% { opacity: 0; } 72%, 92% { opacity: 1; } 100% { opacity: 0; } }
+
+/* IMM mode-probability bars; the animation-name is set per bar in the JS */
+.c-mode { fill: var(--acc); transform-box: fill-box; transform-origin: left; transform: scaleX(.2); animation: 6s ease-in-out infinite; }
+@keyframes c-mode-straight { 0%, 30% { transform: scaleX(.9); }  50%, 100% { transform: scaleX(.15); } }
+@keyframes c-mode-turn     { 0%, 30% { transform: scaleX(.1); }  50%, 75% { transform: scaleX(.85); } 95%, 100% { transform: scaleX(.2); } }
+@keyframes c-mode-speed    { 0%, 60% { transform: scaleX(.08); } 80%, 95% { transform: scaleX(.55); } 100% { transform: scaleX(.08); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .c-m, .c-trk, .c-pred, .c-mode { animation: none !important; }
+  .c-trk { stroke-dashoffset: 0; }
+  .c-m { opacity: .6; }
+}

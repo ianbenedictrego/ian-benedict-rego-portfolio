@@ -1,0 +1,65 @@
+/* ==========================================================================
+   HERO PIPELINE ANIMATION  (markup: js/animations/hero-pipeline.js)
+   One 6s loop. Timeline:
+     0.0s  query dot leaves the QUERY box
+     1.0s  document icons light up (.hl-docs) and send dots into RETRIEVAL
+     2.1s  dot travels RETRIEVAL -> RANKING,  2.6s RANKING -> AGENT
+     3.4s  tool icons light up (.hl-tools) and send dots into the AGENT
+     4.5s  dot leaves the AGENT toward the RESPONSE panel
+     ~4.6s response lines "type in" (.vw) and context bars grow (.vbar)
+   Class prefix: v* = hero SVG.  Keyframes prefix: hero-*
+   ========================================================================== */
+
+/* ---- labels ---- */
+.vt {
+  font: 500 10px "JetBrains Mono", monospace;
+  fill: var(--mute);
+  letter-spacing: .08em;
+  text-anchor: middle;
+  paint-order: stroke;
+  stroke: var(--panel);
+  stroke-width: 6px;
+  stroke-linejoin: round;
+}
+.vt.a { fill: var(--acc); text-anchor: start; stroke: none; }
+.vt.s { font-size: 9px; text-anchor: start; stroke: none; }
+
+/* ---- static shapes ---- */
+.vl { stroke: var(--line); stroke-width: 1.5; fill: none; }                    /* connector line */
+.vn { fill: var(--bg); stroke: var(--acc); stroke-width: 1.5; }                /* round node */
+.vb { fill: var(--bg); stroke: var(--line); stroke-width: 1.2; }               /* box */
+.vi { stroke: var(--acc); stroke-width: 2; fill: none; stroke-linecap: round; stroke-linejoin: round; } /* node icon */
+.vc { fill: var(--bg); stroke: var(--line); }                                  /* icon card */
+.vdot { fill: var(--acc); }                                                    /* travelling particle */
+
+/* ---- animated: dashed flow along the spine ---- */
+.vf { stroke: var(--acc); stroke-width: 1.5; fill: none; stroke-dasharray: 4 8; opacity: .55; animation: hero-flow 1.4s linear infinite; }
+@keyframes hero-flow { to { stroke-dashoffset: -12; } }
+
+/* ---- animated: icon highlights (inputs first, tools later) ---- */
+.vhl { fill: var(--acc); fill-opacity: .14; stroke: var(--acc); stroke-width: 1.5; opacity: 0; }
+.hl-docs  { animation: hero-hl-docs 6s ease-in-out infinite; }
+.hl-tools { animation: hero-hl-tools 6s ease-in-out infinite; }
+@keyframes hero-hl-docs  { 0%, 14% { opacity: 0; } 20%, 36% { opacity: 1; } 44%, 100% { opacity: 0; } }
+@keyframes hero-hl-tools { 0%, 52% { opacity: 0; } 58%, 72% { opacity: 1; } 80%, 100% { opacity: 0; } }
+
+/* ---- animated: pulsing rings around the AI agent ---- */
+.vr { fill: none; stroke: var(--acc); stroke-width: 1; transform-box: fill-box; transform-origin: center; animation: hero-ring 3s ease-out infinite; }
+.vr.b { animation-delay: 1.5s; }
+@keyframes hero-ring { 0% { transform: scale(.9); opacity: .7; } 100% { transform: scale(1.7); opacity: 0; } }
+
+/* ---- animated: response panel ---- */
+.vw { fill: var(--mute); transform-box: fill-box; transform-origin: left; animation: hero-write 6s ease-out infinite; }
+@keyframes hero-write { 0%, 76% { transform: scaleX(0); } 90%, 100% { transform: scaleX(1); } }
+.vbar { fill: var(--acc); transform-box: fill-box; transform-origin: bottom; animation: hero-bars 6s ease-in-out infinite; }
+@keyframes hero-bars { 0%, 76% { transform: scaleY(.15); } 92%, 100% { transform: scaleY(1); } }
+
+/* ---- animated: blinking cursor in the query box ---- */
+.vcur { fill: var(--acc); animation: hero-blink 1s steps(1) infinite; }
+@keyframes hero-blink { 50% { opacity: 0; } }
+
+/* ---- reduced motion: static diagram, no particles ---- */
+@media (prefers-reduced-motion: reduce) {
+  .vf, .vr, .vcur, .hl-docs, .hl-tools, .vw, .vbar { animation: none; }
+  .vdot { display: none; }
+}

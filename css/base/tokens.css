@@ -1,0 +1,66 @@
+/* ==========================================================================
+   DESIGN TOKENS — colours and theme switching.
+   Change a colour here and it updates everywhere (including SVG animations).
+
+   How theming works: the theme name ("dark" | "light") is always present as
+   [data-theme] on <html>. It is set before first paint by the small script in
+   index.html (saved choice, otherwise the OS preference) and changed by the
+   toggle button (js/ui/interactions.js -> P.ui.theme).
+
+   Token roles
+     --bg      page background          --panel  cards, nav, modal
+     --line    borders, dividers        --text   headings / body
+     --mute    secondary text           --acc    brand accent (teal)
+     --accInk  text ON a solid accent   --glow   soft page glow behind the hero
+     --grid    colour of the background grid lines (see css/base/background.css)
+     --sky / --violet / --amber   secondary accents used by the animations
+   ========================================================================== */
+
+/* ---------- DARK (default) ---------- */
+:root {
+  --bg: #060b0e;
+  --panel: #0d161b;
+  --line: #1b2c33;
+  --text: #ecf5f4;
+  --mute: #9db1b6;
+  --acc: #3ae0cb;
+  --accInk: #03221e;
+  --glow: rgba(58, 224, 203, .10);   /* soft light behind the hero */
+  --grid: rgba(58, 224, 203, .07);   /* background grid lines */
+
+  --sky: #38bdf8;
+  --violet: #a78bfa;
+  --amber: #fbbf24;
+
+  color-scheme: dark;
+}
+
+/* ---------- LIGHT ----------
+   Accent is darkened (#0a7a6e = 5.2:1 on white) so small teal text stays readable;
+   the secondary accents are darkened for the same reason. */
+:root[data-theme="light"] {
+  --bg: #f4f7f6;
+  --panel: #ffffff;
+  --line: #d8e3e1;
+  --text: #0f1c1f;
+  --mute: #4b5f64;
+  --acc: #0a7a6e;
+  --accInk: #ffffff;
+  --glow: rgba(10, 122, 110, .10);
+  --grid: rgba(10, 122, 110, .09);
+
+  --sky: #0369a1;
+  --violet: #6d28d9;
+  --amber: #b45309;
+
+  color-scheme: light;
+}
+
+/* ---------- smooth cross-fade while switching (class added briefly by JS) ---------- */
+.theme-anim,
+.theme-anim *,
+.theme-anim *::before,
+.theme-anim *::after {
+  transition: background-color .35s ease, color .35s ease, border-color .35s ease,
+              fill .35s ease, stroke .35s ease, box-shadow .35s ease !important;
+}

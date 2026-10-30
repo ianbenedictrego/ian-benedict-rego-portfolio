@@ -1,0 +1,14 @@
+/* ==========================================================================
+   SKILLS — grid of skill groups (data: js/data/skills.js)
+   An odd last group automatically spans the full width.
+   ========================================================================== */
+
+.skills { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+.skills .box { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 20px; }
+.skills .box:last-child:nth-child(odd) { grid-column: 1 / -1; }
+.skills h3 { margin: 0 0 12px; font-size: 16px; }
+.skills .tags { margin: 0; }
+
+@media (max-width: 600px) {
+  .skills { grid-template-columns: 1fr; }
+}

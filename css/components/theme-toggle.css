@@ -1,0 +1,55 @@
+/* ==========================================================================
+   THEME TOGGLE — sun <-> moon morph  (markup: index.html #theme,
+   behaviour: js/ui/interactions.js -> P.ui.theme)
+
+   One SVG, two states driven by <html data-theme>:
+     light  -> SUN : small core, 8 rays visible, mask-cutout parked off-canvas
+     dark   -> MOON: core grows, cutout circle slides in (crescent), rays shrink away
+   Every piece is a CSS transform, so the whole morph is one transition (.5s).
+   ========================================================================== */
+
+#theme {
+  position: relative;
+  display: grid; place-items: center;
+  width: 38px; height: 38px;
+  padding: 0;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  background: var(--panel);
+  color: var(--text);
+  cursor: pointer;
+  transition: border-color .25s, box-shadow .25s, transform .25s, color .4s;
+}
+#theme:hover {
+  border-color: var(--acc);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--acc) 14%, transparent);
+}
+#theme:active { transform: scale(.92); }
+
+.ti { width: 22px; height: 22px; overflow: visible; transition: transform .6s cubic-bezier(.3, 1.4, .5, 1); }
+.ti * { transform-box: fill-box; transform-origin: center; }
+
+.ti-core { transition: transform .5s cubic-bezier(.3, 1.2, .5, 1); }
+.ti-cut  { transition: transform .5s cubic-bezier(.3, 1.2, .5, 1); }
+.ti-rays { transition: transform .5s cubic-bezier(.3, 1.2, .5, 1), opacity .3s; }
+
+/* ---- SUN (light theme) ---- */
+:root[data-theme="light"] .ti       { transform: rotate(90deg); }
+:root[data-theme="light"] .ti-core  { transform: scale(1); }
+:root[data-theme="light"] .ti-cut   { transform: translate(14px, -14px); }
+:root[data-theme="light"] .ti-rays  { transform: scale(1); opacity: 1; }
+:root[data-theme="light"] #theme    { color: var(--amber); }
+
+/* ---- MOON (dark theme) ---- */
+:root[data-theme="dark"] .ti        { transform: rotate(-20deg); }
+:root[data-theme="dark"] .ti-core   { transform: scale(1.75); }
+:root[data-theme="dark"] .ti-cut    { transform: translate(0, 0); }
+:root[data-theme="dark"] .ti-rays   { transform: scale(.3); opacity: 0; }
+:root[data-theme="dark"] #theme     { color: var(--sky); }
+
+/* gentle wobble on hover */
+#theme:hover .ti { transform: rotate(0deg) scale(1.08); }
+
+@media (prefers-reduced-motion: reduce) {
+  .ti, .ti-core, .ti-cut, .ti-rays, #theme { transition: none; }
+}

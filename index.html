@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <title>Ian Benedict Rego</title>
+    <meta
+      name="description"
+      content="Ian Benedict Rego – GenAI Engineer with a QA background. M.Sc. Data Science student at OVGU Magdeburg, building tested and evaluated LLM systems. Open to Werkstudent and internship roles."
+    />
+    <meta name="theme-color" content="#060b0e" />
+
+    <!-- set the theme (saved choice, else OS preference) before first paint: no flash -->
+    <script>
+      (function () {
+        var t;
+        try { t = localStorage.getItem("theme"); } catch (e) {}
+        if (t !== "light" && t !== "dark")
+          t = matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
+        document.documentElement.dataset.theme = t;
+      })();
+    </script>
+
+    <!-- favicon: SVG for modern browsers, PNG fallbacks for older browsers / iOS home screen -->
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="favicon-32.png" type="image/png" sizes="32x32" />
+    <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- ============ STYLES (order matters: tokens -> base -> components -> sections -> animations) ============ -->
+    <link rel="stylesheet" href="css/base/tokens.css" />
+    <link rel="stylesheet" href="css/base/base.css" />
+    <link rel="stylesheet" href="css/base/background.css" />
+
+    <link rel="stylesheet" href="css/components/nav.css" />
+    <link rel="stylesheet" href="css/components/buttons.css" />
+    <link rel="stylesheet" href="css/components/tags.css" />
+    <link rel="stylesheet" href="css/components/modal.css" />
+    <link rel="stylesheet" href="css/components/theme-toggle.css" />
+
+    <link rel="stylesheet" href="css/sections/hero.css" />
+    <link rel="stylesheet" href="css/sections/common.css" />
+    <link rel="stylesheet" href="css/sections/about.css" />
+    <link rel="stylesheet" href="css/sections/experience.css" />
+    <link rel="stylesheet" href="css/sections/projects.css" />
+    <link rel="stylesheet" href="css/sections/skills.css" />
+    <link rel="stylesheet" href="css/sections/education.css" />
+    <link rel="stylesheet" href="css/sections/footer.css" />
+
+    <!-- animations: one file for the hero, a shared base for covers, one file per cover -->
+    <link rel="stylesheet" href="css/animations/hero-pipeline.css" />
+    <link rel="stylesheet" href="css/animations/covers-base.css" />
+    <link rel="stylesheet" href="css/animations/cover-agentic-router.css" />
+    <link rel="stylesheet" href="css/animations/cover-nlp-bias.css" />
+    <link rel="stylesheet" href="css/animations/cover-road-hotspots.css" />
+    <link rel="stylesheet" href="css/animations/cover-vessel-tracking.css" />
+  </head>
+  <body>
+    <nav>
+      <div class="wrap">
+        <a class="logo mono" id="logo" href="#top" aria-label="Home">IR</a>
+        <ul id="nav-links"></ul>
+        <div class="nav-actions">
+          <button
+            id="menu"
+            type="button"
+            aria-label="Toggle navigation menu"
+            aria-controls="nav-links"
+            aria-expanded="false"
+          >
+            ☰
+          </button>
+          <button id="theme" type="button" aria-label="Switch theme">
+            <svg class="ti" viewBox="0 0 24 24" aria-hidden="true">
+              <mask id="ti-mask">
+                <rect x="-12" y="-12" width="48" height="48" fill="#fff" />
+                <circle class="ti-cut" cx="17" cy="7" r="6" fill="#000" />
+              </mask>
+              <g mask="url(#ti-mask)">
+                <circle class="ti-core" cx="12" cy="12" r="5" fill="currentColor" />
+              </g>
+              <g class="ti-rays" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                <path d="M12 1.5v2M12 20.5v2M1.5 12h2M20.5 12h2M4.6 4.6l1.4 1.4M18 18l1.4 1.4M4.6 19.4L6 18M18 6l1.4-1.4" />
+              </g>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Every block below is filled by js/render/*.js from the files in js/data/ -->
+    <main id="top" class="wrap">
+      <div class="hero" id="hero"></div>
+      <section id="about"></section>
+      <section id="experience"></section>
+      <section id="projects"></section>
+      <section id="skills"></section>
+      <section id="education"></section>
+      <section id="contact"></section>
+    </main>
+
+    <dialog id="dlg" aria-labelledby="mt">
+      <button class="xbtn" type="button" id="xc" aria-label="Close">×</button>
+      <div class="mgrid">
+        <div id="mtx"></div>
+        <div id="mcv"></div>
+      </div>
+    </dialog>
+
+    <footer>
+      <div class="wrap">
+        <span class="mono" id="footer-text"></span>
+        <a class="btn top" href="#top" id="totop" aria-label="Go to top of page"
+          >↑ Go to top</a
+        >
+      </div>
+    </footer>
+
+    <noscript
+      ><p style="padding: 24px; text-align: center">
+        This portfolio needs JavaScript enabled to display its content.
+      </p></noscript
+    >
+
+    <!-- ============ SCRIPTS (order matters) ============ -->
+    <!-- 1. core namespace -->
+    <script src="js/core/namespace.js"></script>
+
+    <!-- 2. EDIT THESE: your content -->
+    <script src="js/data/profile.js"></script>
+    <script src="js/data/experience.js"></script>
+    <script src="js/data/projects.js"></script>
+    <script src="js/data/skills.js"></script>
+    <script src="js/data/education.js"></script>
+
+    <!-- 3. animations: helpers first, then hero, then one file per project cover -->
+    <script src="js/animations/svg-helpers.js"></script>
+    <script src="js/animations/hero-pipeline.js"></script>
+    <script src="js/animations/covers/agentic-router.js"></script>
+    <script src="js/animations/covers/hybrid-retrieval.js"></script>
+    <script src="js/animations/covers/nlp-bias.js"></script>
+    <script src="js/animations/covers/road-hotspots.js"></script>
+    <script src="js/animations/covers/vessel-tracking.js"></script>
+
+    <!-- 4. renderers, behaviour, boot -->
+    <script src="js/render/hero-about.js"></script>
+    <script src="js/render/experience.js"></script>
+    <script src="js/render/projects.js"></script>
+    <script src="js/render/modal.js"></script>
+    <script src="js/render/skills-education-contact.js"></script>
+    <script src="js/ui/interactions.js"></script>
+    <script src="js/ui/scrollspy.js"></script>
+    <script src="js/main.js"></script>
+  </body>
+</html>

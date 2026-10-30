@@ -1,0 +1,33 @@
+/* ==========================================================================
+   EDUCATION — degree cards + "Beyond the degree" cards (incl. language bars)
+   ========================================================================== */
+
+.edu { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+.ec { position: relative; background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 24px 24px 24px 28px; }
+.ec::before { content: ""; position: absolute; left: 0; top: 24px; bottom: 24px; width: 3px; border-radius: 0 3px 3px 0; background: var(--acc); }
+.ec.done::before { background: var(--line); }
+.ec .d { display: flex; justify-content: space-between; gap: 12px; font-size: 12px; color: var(--acc); }
+.ec .d b { font-weight: 500; color: var(--mute); border: 1px solid var(--line); border-radius: 99px; padding: 1px 10px; font-family: Inter, sans-serif; }
+.ec h3 { margin: 12px 0 4px; font-size: 18px; line-height: 1.3; }
+.ec p { margin: 0; color: var(--mute); font-size: 14px; }
+
+.beyond-h { font-size: 16px; margin: 40px 0 16px; color: var(--mute); font-weight: 500; }
+.beyond { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.bc { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 20px; }
+.bc h4 { margin: 0 0 8px; font-size: 15px; }
+.bc p { margin: 0; color: var(--mute); font-size: 14px; }
+
+/* language level bars: <i> = current level, <i class="t"> = target level */
+.lv { position: relative; height: 4px; background: var(--line); border-radius: 4px; margin: 6px 0 16px; }
+.lv:last-child { margin-bottom: 0; }
+.lv i { position: absolute; left: 0; top: 0; bottom: 0; border-radius: 4px; background: var(--acc); }
+.lv i.t { background: var(--acc); opacity: .3; }
+.lang { display: flex; justify-content: space-between; font-size: 13px; color: var(--text); }
+.lang span { color: var(--mute); }
+
+@media (max-width: 860px) {
+  .beyond { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 600px) {
+  .edu, .beyond { grid-template-columns: 1fr; }
+}
